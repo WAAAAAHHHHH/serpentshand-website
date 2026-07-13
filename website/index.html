@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiwi — Keeper of Hidden Knowledge</title>
+  <meta name="description" content="The private archive of Kiwi — keeper of forbidden knowledge, builder of strange and working things. Browse the Artifacts, the Reading Room, and the Sealed Channels.">
+  <meta name="author" content="Kiwi">
+  <meta name="theme-color" content="#07090a">
+  <link rel="canonical" href="https://kiwi.pages.dev/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Kiwi — Keeper of Hidden Knowledge">
+  <meta property="og:description" content="A hidden archive of artifacts, forum entries, and sealed channels — tended by its Keeper.">
+  <meta property="og:image" content="/assets/seal.svg">
+  <meta property="og:url" content="https://kiwi.pages.dev/">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Kiwi — Keeper of Hidden Knowledge">
+  <meta name="twitter:description" content="A hidden archive of artifacts, notes, and sealed channels.">
+
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.json">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kiwi",
+    "alternateName": "aboredloner",
+    "description": "Keeper of Hidden Knowledge — builder, archivist, and collector of strange working things.",
+    "url": "https://kiwi.pages.dev/",
+    "sameAs": [
+      "https://instagram.com/aboredloner",
+      "https://www.threads.net/@aboredloner"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Ambient background layers (decorative, non-interactive) -->
+  <div class="bg-layer" aria-hidden="true">
+    <canvas id="dust-canvas"></canvas>
+    <div class="fog fog--one"></div>
+    <div class="fog fog--two"></div>
+    <div class="sigil-field">
+      <img src="/assets/seal.svg" alt="" class="sigil sigil--a">
+      <img src="/assets/seal.svg" alt="" class="sigil sigil--b">
+      <img src="/assets/seal.svg" alt="" class="sigil sigil--c">
+    </div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+  </div>
+  <div class="mouse-light" id="mouse-light" aria-hidden="true"></div>
+
+  <!-- Preloader -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <img src="/assets/seal.svg" alt="" class="preloader__seal">
+    <p class="preloader__text">Unsealing the Archive…</p>
+  </div>
+
+  <header class="site-header" id="site-header">
+    <div class="bulletin" id="bulletin" role="status" aria-live="polite">
+      <div class="bulletin__inner">
+        <span class="bulletin__tag">Bulletin</span>
+        <p class="bulletin__text" id="bulletin-text"></p>
+      </div>
+      <button class="bulletin__dismiss" id="bulletin-dismiss" aria-label="Dismiss bulletin">✕</button>
+    </div>
+
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <a href="#top" class="nav__mark" aria-label="Kiwi — home">
+        <img src="/assets/seal.svg" alt="" width="28" height="28">
+        <span>Kiwi</span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#forum">Forum</a></li>
+        <li><a href="#contacts">Contacts</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="hero__seal-ring" aria-hidden="true">
+        <svg viewBox="0 0 400 400" class="hero__ring-svg">
+          <circle cx="200" cy="200" r="188" class="ring ring--slow"/>
+          <circle cx="200" cy="200" r="170" class="ring ring--slower"/>
+        </svg>
+      </div>
+
+      <figure class="hero__portrait">
+        <img
+          src="/assets/kiwi.jpg"
+          alt="Portrait of Kiwi, Keeper of Hidden Knowledge"
+          width="220" height="220"
+          onerror="this.onerror=null;this.src='/assets/portrait-fallback.svg';"
+        >
+      </figure>
+
+      <p class="hero__eyebrow">Restricted Access · Archive of K.</p>
+      <h1 class="hero__name">Kiwi</h1>
+      <p class="hero__subtitle">Keeper of Hidden Knowledge</p>
+
+      <p class="hero__desc">
+        I build quiet, working things by day and file them away like relics by night.
+        This archive holds what I've made, what I've learned, and the few channels
+        through which I can still be reached. Enter slowly — some of it bites back.
+      </p>
+
+      <a href="#forum" class="btn btn--glow" id="enter-btn">
+        <span>Enter the Archive</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v10M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+
+
+    <!-- FORUM -->
+    <section class="section" id="forum" aria-labelledby="forum-heading">
+      <div class="section__head reveal">
+        <span class="section__kicker">Document 02</span>
+        <h2 class="section__title" id="forum-heading">The Reading Room</h2>
+        <p class="section__intro">Leave word for those who come after. Entries are kept only in this browser.</p>
+      </div>
+
+      <div class="forum reveal">
+        <form class="forum__new" id="forum-new-thread" novalidate>
+          <div class="forum__row">
+            <div class="forum__field">
+              <label for="thread-name">Name</label>
+              <input type="text" id="thread-name" name="name" maxlength="40" required placeholder="A name, or a pseudonym" autocomplete="off">
+            </div>
+            <div class="forum__field">
+              <label for="thread-subject">Subject</label>
+              <input type="text" id="thread-subject" name="subject" maxlength="80" required placeholder="What have you found?" autocomplete="off">
+            </div>
+          </div>
+          <div class="forum__field">
+            <label for="thread-body">Entry</label>
+            <textarea id="thread-body" name="body" rows="3" maxlength="600" required placeholder="Write your entry into the record…"></textarea>
+          </div>
+          <div class="forum__submit-row">
+            <p class="forum__hint" id="forum-form-hint" role="alert"></p>
+            <button type="submit" class="btn btn--glow">
+              <span>Leave Entry</span>
+            </button>
+          </div>
+        </form>
+
+        <p class="forum__empty" id="forum-empty" hidden>No entries yet. Be the first to write in the record.</p>
+
+        <ul class="forum__threads" id="forum-threads" aria-label="Forum entries"></ul>
+      </div>
+    </section>
+
+    <!-- SOCIAL / CONTACTS -->
+    <section class="section" id="contacts" aria-labelledby="contacts-heading">
+      <div class="section__head reveal">
+        <span class="section__kicker">Document 03</span>
+        <h2 class="section__title" id="contacts-heading">Sealed Channels</h2>
+        <p class="section__intro">Ways to reach the Keeper. Each seal opens elsewhere.</p>
+      </div>
+
+      <ul class="channels">
+        <li class="channel reveal">
+          <a href="https://instagram.com/aboredloner" target="_blank" rel="noopener noreferrer">
+            <span class="channel__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></svg>
+            </span>
+            <span class="channel__text">
+              <span class="channel__label">Instagram</span>
+              <span class="channel__handle">@aboredloner</span>
+            </span>
+            <span class="channel__go" aria-hidden="true">→</span>
+          </a>
+        </li>
+
+        <li class="channel reveal">
+          <a href="https://www.threads.net/@aboredloner" target="_blank" rel="noopener noreferrer">
+            <span class="channel__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2c5 0 8 3.2 8 8.3 0 4.2-2.1 6.6-5 7.4M12 2c-5 0-8 3.2-8 8.3 0 6.4 3.7 9.7 8 9.7 2 0 3.6-.5 4.7-1.3" stroke="currentColor" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>
+            </span>
+            <span class="channel__text">
+              <span class="channel__label">Threads</span>
+              <span class="channel__handle">@aboredloner</span>
+            </span>
+            <span class="channel__go" aria-hidden="true">→</span>
+          </a>
+        </li>
+
+        <li class="channel reveal">
+          <a href="https://github.com/" target="_blank" rel="noopener noreferrer">
+            <span class="channel__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.8 9.6.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.3-3.4-1.3-.4-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.5-1.4.1-2.9 0 0 .8-.3 2.8 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.8-1 2.8-1 .6 1.5.2 2.6.1 2.9.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .4.3.7 1 .7 2v2.9c0 .3.2.6.7.5 3.9-1.3 6.8-5.1 6.8-9.6C22 6.6 17.5 2 12 2Z" fill="currentColor"/></svg>
+            </span>
+            <span class="channel__text">
+              <span class="channel__label">GitHub</span>
+              <span class="channel__handle">view repositories</span>
+            </span>
+            <span class="channel__go" aria-hidden="true">→</span>
+          </a>
+        </li>
+
+        <li class="channel reveal">
+          <a href="#" target="_blank" rel="noopener noreferrer">
+            <span class="channel__icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 8.5C6 6.6 8.7 5 12 5s6 1.6 6 3.5c0 3-1.3 8.5-2.4 9.6-.6.6-1.6-.3-1.9-1-.5.2-1.1.3-1.7.3s-1.2-.1-1.7-.3c-.3.7-1.3 1.6-1.9 1-1.1-1.1-2.4-6.6-2.4-9.6Z" stroke="currentColor" stroke-width="1.3"/><circle cx="9.8" cy="10.5" r="1" fill="currentColor"/><circle cx="14.2" cy="10.5" r="1" fill="currentColor"/></svg>
+            </span>
+            <span class="channel__text">
+              <span class="channel__label">Discord</span>
+              <span class="channel__handle">by invitation</span>
+            </span>
+            <span class="channel__go" aria-hidden="true">→</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__seal">
+      <img src="/assets/seal.svg" alt="" width="40" height="40">
+    </div>
+    <p class="footer__line reveal">The Library remembers every visitor.</p>
+    <p class="footer__meta">&copy; <span id="year"></span> Kiwi. All relics reserved.</p>
+  </footer>
+
+  <script src="/script.js" defer></script>
+</body>
+</html>
