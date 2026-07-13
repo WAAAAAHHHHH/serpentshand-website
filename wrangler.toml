@@ -7,6 +7,6 @@ compatibility_date = "2024-01-01"
 # For local development with wrangler, uncomment and add your database_name and database_id:
 #
 # [[d1_databases]]
-# binding = "DB"
-# database_name = "your-database-name"
-# database_id = "your-database-id"
+binding = "DB"
+database_name = "serpentshand-db
+database_id = "c1ba95d8-47cc-4bbd-b5ed-3d2c3ebbc84a"
