@@ -452,10 +452,14 @@
 
       try {
         const response = await fetch('/api/messages', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, subject, body })
-        });
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name, subject, body })
+}).catch(err => {
+  console.error('Fetch failed:', err);
+  throw new Error('Network or server error');
+});
+
 
         if (response.ok) {
           const result = await response.json();
