@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Kiwi Archive</title>
+  <meta name="description" content="Sign in to the Kiwi Archive to post entries in the Reading Room.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="auth-body">
+
+  <!-- Ambient background (same as index) -->
+  <div class="bg-layer" aria-hidden="true">
+    <div class="fog fog--one"></div>
+    <div class="fog fog--two"></div>
+    <div class="sigil-field">
+      <img src="/assets/seal.svg" alt="" class="sigil sigil--a">
+      <img src="/assets/seal.svg" alt="" class="sigil sigil--c">
+    </div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+  </div>
+
+  <div class="mouse-light" id="mouse-light" aria-hidden="true"></div>
+
+  <header class="site-header" id="site-header">
+    <nav class="nav is-scrolled" aria-label="Primary">
+      <a href="/" class="nav__mark" aria-label="Kiwi — home">
+        <img src="/assets/seal.svg" alt="" width="28" height="28">
+        <span>Kiwi</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="/#forum">Forum</a></li>
+        <li><a href="/#contacts">Contacts</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="auth-page">
+    <div class="auth-card">
+      <div class="auth-card__header">
+        <img src="/assets/seal.svg" alt="" class="auth-card__seal">
+        <h1 class="auth-card__title">Sign In</h1>
+        <p class="auth-card__sub">Enter the Archive</p>
+      </div>
+
+      <form class="auth-form" id="login-form" novalidate>
+        <div class="auth-form__field">
+          <label for="login-id">Email or Username</label>
+          <input
+            type="text"
+            id="login-id"
+            name="login"
+            autocomplete="username email"
+            required
+            placeholder="you@example.com or username"
+          >
+        </div>
+
+        <div class="auth-form__field">
+          <label for="login-password">Password</label>
+          <div class="auth-form__pw-wrap">
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              autocomplete="current-password"
+              required
+              placeholder="Your passphrase"
+            >
+            <button type="button" class="auth-form__pw-toggle" id="pw-toggle" aria-label="Toggle password visibility">
+              <svg id="pw-eye" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <p class="auth-form__error" id="login-error" role="alert" hidden></p>
+
+        <button type="submit" class="btn btn--glow auth-form__submit" id="login-btn">
+          <span>Sign In</span>
+        </button>
+      </form>
+
+      <p class="auth-card__switch">
+        No account?
+        <a href="/signup.html">Create one →</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    (() => {
+      'use strict';
+
+      // Mouse light
+      const ml = document.getElementById('mouse-light');
+      if (ml && window.matchMedia('(hover: hover)').matches) {
+        window.addEventListener('pointermove', e => {
+          ml.style.setProperty('--mx', `${e.clientX}px`);
+          ml.style.setProperty('--my', `${e.clientY}px`);
+        });
+      }
+
+      // Redirect if already logged in
+      fetch('/api/auth/me').then(r => {
+        if (r.ok) window.location.replace('/');
+      }).catch(() => {});
+
+      // Password toggle
+      const pwInput  = document.getElementById('login-password');
+      const pwToggle = document.getElementById('pw-toggle');
+      if (pwToggle && pwInput) {
+        pwToggle.addEventListener('click', () => {
+          const show = pwInput.type === 'password';
+          pwInput.type = show ? 'text' : 'password';
+          pwToggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+        });
+      }
+
+      // Login form submission
+      const form      = document.getElementById('login-form');
+      const errorEl   = document.getElementById('login-error');
+      const submitBtn = document.getElementById('login-btn');
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+        errorEl.hidden = true;
+
+        const login    = form.querySelector('[name=login]').value.trim();
+        const password = form.querySelector('[name=password]').value;
+
+        if (!login || !password) {
+          errorEl.textContent = 'Please fill in all fields.';
+          errorEl.hidden = false;
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.querySelector('span').textContent = 'Signing in…';
+
+        try {
+          const res  = await fetch('/api/auth/login', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify({ login, password }),
+          });
+          const data = await res.json();
+
+          if (res.ok) {
+            // Redirect to the page they came from, or home
+            const redirect = new URLSearchParams(location.search).get('next') || '/';
+            window.location.replace(redirect);
+          } else {
+            errorEl.textContent = data.error || 'Sign in failed. Please try again.';
+            errorEl.hidden = false;
+          }
+        } catch {
+          errorEl.textContent = 'A network error occurred. Please try again.';
+          errorEl.hidden = false;
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.querySelector('span').textContent = 'Sign In';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
