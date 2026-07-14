@@ -1,0 +1,154 @@
+/* ============================================================
+   AUTH PAGES — login, signup, profile
+   Reuses design tokens defined in style.css (:root vars).
+   Loaded alongside style.css, does not modify it.
+   ============================================================ */
+
+.auth-page {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  background: rgba(20, 25, 20, 0.55);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.auth-card__kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--emerald-bright);
+  margin-bottom: 0.6rem;
+}
+
+.auth-card__title {
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  margin-bottom: 0.5rem;
+}
+
+.auth-card__intro {
+  color: var(--parchment-dim);
+  font-size: 0.92rem;
+  margin-bottom: 1.75rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.1rem;
+}
+.auth-field label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass-bright);
+}
+.auth-field input {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--parchment);
+  background: rgba(7, 9, 10, 0.6);
+  border: 1px solid var(--border-dim);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.85rem;
+  transition: border-color 250ms ease, box-shadow 250ms ease;
+}
+.auth-field input:focus {
+  outline: none;
+  border-color: var(--emerald);
+  box-shadow: 0 0 0 3px rgba(47,158,107,0.15);
+}
+
+.auth-hint {
+  margin: 0 0 1rem;
+  font-size: 0.82rem;
+  min-height: 1.2em;
+  color: #c88a8a;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+.auth-hint.is-visible { opacity: 1; }
+.auth-hint.is-error { color: #c88a8a; }
+
+.auth-card .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.auth-card__foot {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--parchment-dim);
+}
+.auth-card__foot a {
+  color: var(--emerald-bright);
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease;
+}
+.auth-card__foot a:hover,
+.auth-card__foot a:focus-visible {
+  border-color: var(--emerald-bright);
+}
+
+/* Nav auth slot (Login/Sign Up or Account link) */
+#nav-auth-slot {
+  display: flex;
+  gap: 1.25rem;
+  margin-left: clamp(1.2rem, 3vw, 2.5rem);
+}
+#nav-auth-slot a {
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--parchment-dim);
+  transition: color 250ms ease;
+}
+#nav-auth-slot a:hover,
+#nav-auth-slot a:focus-visible {
+  color: var(--emerald-bright);
+}
+
+/* Profile page specifics */
+.profile-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1.25rem;
+}
+.profile-row__label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass-bright);
+}
+.profile-row__value {
+  font-size: 1rem;
+  color: var(--parchment);
+}
+
+@media (max-width: 768px) {
+  #nav-auth-slot {
+    flex-direction: column;
+    gap: 0;
+    margin-left: 0;
+  }
+  #nav-auth-slot a { padding: 0.9rem 1.2rem; }
+}
