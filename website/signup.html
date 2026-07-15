@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account — Kiwi's Archive</title>
+  <meta name="description" content="Create an account to leave entries in the Reading Room.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#07090a">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-layer" aria-hidden="true">
+    <div class="fog fog--one"></div>
+    <div class="fog fog--two"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+  </div>
+  <div class="mouse-light" id="mouse-light" aria-hidden="true"></div>
+
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <img src="/assets/seal.svg" alt="" class="preloader__seal">
+    <p class="preloader__text">Unsealing the Archive…</p>
+  </div>
+
+  <header class="site-header" id="site-header">
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <a href="/" class="nav__mark" aria-label="Kiwi — home">
+        <img src="/assets/seal.svg" alt="" width="28" height="28">
+        <span>Kiwi</span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="/#forum">Forum</a></li>
+        <li><a href="/#contacts">Contacts</a></li>
+      </ul>
+      <div class="nav__auth" id="nav-auth"></div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="auth-page">
+      <div class="auth-card reveal is-visible">
+        <h1 class="auth-card__title">Join the Archive</h1>
+        <p class="auth-card__subtitle">Create an account to leave entries in the Reading Room.</p>
+
+        <form id="signup-form" novalidate>
+          <div class="auth-field">
+            <label for="signup-username">Username</label>
+            <input type="text" id="signup-username" name="username" required minlength="3" maxlength="20" autocomplete="username" pattern="[a-zA-Z0-9_]{3,20}">
+            <small>3–20 characters: letters, numbers, underscores.</small>
+          </div>
+          <div class="auth-field">
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" name="email" required autocomplete="email">
+          </div>
+          <div class="auth-field">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" required minlength="8" autocomplete="new-password">
+            <small>At least 8 characters.</small>
+          </div>
+          <button type="submit" class="btn btn--glow auth-card__submit">
+            <span>Create Account</span>
+          </button>
+          <p class="auth-card__hint" id="signup-hint" role="alert"></p>
+        </form>
+
+        <p class="auth-card__footer">Already have an account? <a href="/login.html">Sign in</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__seal">
+      <img src="/assets/seal.svg" alt="" width="40" height="40">
+    </div>
+    <p class="footer__meta">&copy; <span id="year"></span> Kiwi. All relics reserved.</p>
+  </footer>
+
+  <script src="/script.js" defer></script>
+  <script src="/auth-pages.js" defer></script>
+</body>
+</html>
