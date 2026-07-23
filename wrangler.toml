@@ -1,0 +1,40 @@
+name = "kiwi-archive"
+compatibility_date = "2024-01-01"
+
+# ============================================================
+# D1 Database Binding
+# ============================================================
+# The application uses a D1 database bound to the variable "DB".
+#
+# PRODUCTION (Cloudflare Dashboard):
+#   Go to Pages → your project → Settings → Functions → D1 Database bindings
+#   Add a binding:  Variable name = "DB", select your database
+#
+# LOCAL DEVELOPMENT (Wrangler):
+#   Uncomment the block below and fill in your database details.
+#   Find database_id in the Cloudflare Dashboard under Workers & Pages → D1.
+#
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "your-database-name"
+# database_id   = "your-database-id"
+
+# ============================================================
+# Database Migration
+# ============================================================
+# Before first use, run the migration to create the auth tables:
+#
+#   npx wrangler d1 execute <your-database-name> \
+#     --file=migrations/0001_auth.sql \
+#     --remote
+#
+# For local development:
+#   npx wrangler d1 execute <your-database-name> \
+#     --file=migrations/0001_auth.sql \
+#     --local
+#
+# The migration adds:
+#   - users table (accounts, profiles)
+#   - sessions table (auth sessions)
+#   - user_id column to messages (links posts to users)
+# ============================================================

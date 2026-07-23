@@ -1,0 +1,18 @@
+{
+  "name": "Kiwi — Keeper of Hidden Knowledge",
+  "short_name": "Kiwi",
+  "description": "The private archive of Kiwi — keeper of forbidden knowledge.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#07090a",
+  "theme_color": "#07090a",
+  "icons": [
+    {
+      "src": "/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
