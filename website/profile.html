@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile &amp; Settings — Kiwi's Archive</title>
+  <meta name="description" content="Manage your Archive profile.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#07090a">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="bg-layer" aria-hidden="true">
+    <div class="fog fog--one"></div>
+    <div class="fog fog--two"></div>
+    <div class="vignette"></div>
+    <div class="grain"></div>
+  </div>
+  <div class="mouse-light" id="mouse-light" aria-hidden="true"></div>
+
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <img src="/assets/seal.svg" alt="" class="preloader__seal">
+    <p class="preloader__text">Unsealing the Archive…</p>
+  </div>
+
+  <header class="site-header" id="site-header">
+    <nav class="nav" id="site-nav" aria-label="Primary">
+      <a href="/" class="nav__mark" aria-label="Kiwi — home">
+        <img src="/assets/seal.svg" alt="" width="28" height="28">
+        <span>Kiwi</span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="/#forum">Forum</a></li>
+        <li><a href="/#contacts">Contacts</a></li>
+      </ul>
+      <div class="nav__auth" id="nav-auth"></div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section" style="padding-top: clamp(7rem, 12vw, 9rem);">
+      <div class="profile-page">
+
+        <!-- Shown only to signed-out visitors -->
+        <p class="forum__gate" id="profile-signed-out" hidden>
+          You need to <a href="/login.html">sign in</a> to view your profile.
+        </p>
+
+        <div id="profile-content" hidden>
+          <div class="profile-header reveal is-visible">
+            <img class="profile-avatar" id="profile-avatar-img" src="" alt="" onerror="this.style.visibility='hidden';">
+            <div>
+              <h1 class="profile-heading__name" id="profile-display-name"></h1>
+              <p class="profile-heading__handle" id="profile-username-handle"></p>
+              <div class="profile-stats">
+                <div>
+                  <strong id="profile-post-count">0</strong>
+                  entries written
+                </div>
+                <div>
+                  <strong id="profile-joined-date">—</strong>
+                  member since
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-card reveal is-visible">
+            <h2>Edit Profile</h2>
+            <form id="profile-form" novalidate>
+              <div class="auth-field">
+                <label for="profile-display-name-input">Display Name</label>
+                <input type="text" id="profile-display-name-input" maxlength="60">
+              </div>
+              <div class="auth-field">
+                <label for="profile-username-input">Username</label>
+                <input type="text" id="profile-username-input" maxlength="20" pattern="[a-zA-Z0-9_]{3,20}">
+                <small>3–20 characters: letters, numbers, underscores.</small>
+              </div>
+              <div class="auth-field">
+                <label for="profile-description-input">Bio / Description</label>
+                <textarea id="profile-description-input" rows="4" maxlength="500"></textarea>
+              </div>
+              <div class="profile-card__actions">
+                <p class="auth-card__hint" id="profile-form-hint" role="alert" style="margin:0; text-align:left;"></p>
+                <button type="submit" class="btn btn--glow btn--small"><span>Save Changes</span></button>
+              </div>
+            </form>
+          </div>
+
+          <div class="profile-card reveal is-visible">
+            <h2>Profile Picture</h2>
+            <p class="section__intro" style="text-align:left; margin-bottom:1rem;" id="avatar-mode-note"></p>
+            <form id="avatar-form" novalidate>
+              <div class="profile-card__row">
+                <div class="auth-field" style="flex:1; margin-bottom:0;">
+                  <label for="avatar-url-input" id="avatar-url-label">Image URL</label>
+                  <input type="url" id="avatar-url-input" placeholder="https://example.com/avatar.png">
+                </div>
+                <input type="file" id="avatar-file-input" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+              </div>
+              <div class="profile-card__actions">
+                <p class="auth-card__hint" id="avatar-form-hint" role="alert" style="margin:0; text-align:left;"></p>
+                <button type="submit" class="btn btn--ghost btn--small"><span>Update Avatar</span></button>
+              </div>
+            </form>
+          </div>
+
+          <div class="profile-card reveal is-visible">
+            <h2>Account</h2>
+            <button type="button" class="btn btn--ghost btn--small" id="profile-logout-btn"><span>Sign Out</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__seal">
+      <img src="/assets/seal.svg" alt="" width="40" height="40">
+    </div>
+    <p class="footer__meta">&copy; <span id="year"></span> Kiwi. All relics reserved.</p>
+  </footer>
+
+  <script src="/script.js" defer></script>
+  <script src="/auth-pages.js" defer></script>
+</body>
+</html>
